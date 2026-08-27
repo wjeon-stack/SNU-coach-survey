@@ -1000,6 +1000,7 @@ async function handleSubmit(e){
 }
 
 function renderSuccess(record){
+  try{ localStorage.setItem('coachSurveySubmitted', '1'); }catch(e){}
   const app = document.getElementById('app');
   app.innerHTML = `
   <div class="success-screen">
@@ -1166,7 +1167,13 @@ const params = new URLSearchParams(window.location.search);
 if(params.get('admin') === '1'){
   renderAdmin();
 } else {
-  renderSurvey();
+  let alreadySubmitted = false;
+  try{ alreadySubmitted = localStorage.getItem('coachSurveySubmitted') === '1'; }catch(e){}
+  if(alreadySubmitted){
+    renderSuccess();
+  } else {
+    renderSurvey();
+  }
 }
 </script>
 </body>
