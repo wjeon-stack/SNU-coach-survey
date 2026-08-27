@@ -1,0 +1,1125 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>서울대학교 대학원생 1:1 커리어코칭 희망코치진 설문조사</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#16235C;
+    --blue:#2F6FED;
+    --blue-tint:#EAF1FF;
+    --orange:#FF7A32;
+    --orange-tint:#FFF0E4;
+    --pink:#FF4D79;
+    --pink-tint:#FFEAF0;
+    --paper:#F5F7FC;
+    --white:#FFFFFF;
+    --ink:#20242C;
+    --slate:#697386;
+    --line:#E7ECF7;
+    --danger:#D9455F;
+    --radius:14px;
+  }
+  *{box-sizing:border-box;}
+  html{background:var(--navy);}
+  body{
+    margin:0;
+    font-family:'Pretendard', -apple-system, BlinkMacSystemFont, 'Malgun Gothic', sans-serif;
+    background:var(--navy);
+    color:var(--ink);
+    line-height:1.65;
+  }
+  .wrap{max-width:720px; margin:0 auto; padding:0 16px 60px;}
+
+  /* Decorative top band (poster-style banner) */
+  .band{
+    position:relative;
+    height:74px;
+    overflow:hidden;
+  }
+  .band .star{
+    position:absolute;
+    color:#FFFFFF;
+    opacity:.85;
+  }
+  .band .star.s1{top:14px; left:12%; font-size:16px;}
+  .band .star.s2{top:36px; left:26%; font-size:10px;}
+  .band .star.s3{top:10px; right:16%; font-size:13px;}
+  .band .star.s4{top:40px; right:8%; font-size:18px;}
+  .band .dot{
+    position:absolute; border-radius:50%; background:rgba(255,255,255,.35);
+  }
+  .band .dot.d1{width:8px; height:8px; top:22px; left:44%;}
+  .band .dot.d2{width:5px; height:5px; top:48px; right:32%;}
+
+  /* Document sheet frame — floats up over the banner, poster-card style */
+  .sheet{
+    background:var(--white);
+    border-radius:22px;
+    padding:0;
+    margin-top:-26px;
+    box-shadow:0 18px 40px rgba(15,25,70,0.25);
+  }
+  .sheet-inner{padding:32px 30px 28px;}
+  @media (max-width:520px){ .sheet-inner{padding:26px 20px 24px;} }
+
+  /* Header */
+  .hero{
+    padding:6px 0 24px;
+    text-align:center;
+  }
+  .hero .eyebrow{
+    display:inline-block;
+    font-size:12px;
+    font-weight:800;
+    letter-spacing:.03em;
+    color:var(--white);
+    background:var(--orange);
+    padding:6px 14px;
+    border-radius:999px;
+    margin-bottom:16px;
+  }
+  .hero h1{
+    font-size:26px;
+    font-weight:800;
+    color:var(--navy);
+    margin:0 0 14px;
+    letter-spacing:-0.01em;
+    line-height:1.45;
+  }
+  .hero h1 .accent{color:var(--blue);}
+  .hero-dots{
+    display:flex;
+    justify-content:center;
+    gap:7px;
+  }
+  .hero-dots span{width:7px; height:7px; border-radius:50%;}
+  .hero-dots span:nth-child(1){background:var(--blue);}
+  .hero-dots span:nth-child(2){background:var(--orange);}
+  .hero-dots span:nth-child(3){background:var(--pink);}
+
+  /* Intro block (part of the sheet, not a separate card) */
+  .intro-block{
+    padding:20px 0 4px;
+    margin-bottom:22px;
+  }
+  .intro-block p{
+    font-size:14.5px;
+    color:var(--ink);
+    margin:0 0 13px;
+  }
+  .intro-block p:last-of-type{margin-bottom:0;}
+  .intro-block strong{color:var(--navy); font-weight:700;}
+  .notice{
+    display:flex;
+    align-items:flex-start;
+    gap:10px;
+    background:var(--orange-tint);
+    border-radius:12px;
+    padding:12px 16px;
+    font-size:14.5px;
+    font-weight:700;
+    color:var(--navy);
+    margin:18px 0;
+  }
+  .notice-icon{
+    width:22px; height:22px; border-radius:50%;
+    background:var(--orange); color:var(--white);
+    display:flex; align-items:center; justify-content:center;
+    font-size:12px; font-weight:800; flex-shrink:0;
+    margin-top:1px;
+  }
+  .meta-row{
+    display:flex;
+    gap:12px;
+    flex-wrap:wrap;
+    margin-top:20px;
+  }
+  .meta-item{
+    flex:1 1 200px;
+    display:flex;
+    align-items:center;
+    gap:11px;
+    padding:13px 14px;
+    background:var(--blue-tint);
+    border-radius:12px;
+  }
+  .meta-icon{
+    width:32px; height:32px; border-radius:50%;
+    background:var(--white); color:var(--blue);
+    display:flex; align-items:center; justify-content:center;
+    font-size:15px; flex-shrink:0;
+  }
+  .meta-text{display:flex; flex-direction:column;}
+  .meta-item .meta-label{
+    font-size:10.5px; font-weight:700; letter-spacing:.08em; text-transform:uppercase;
+    color:var(--slate); display:block; margin-bottom:2px;
+  }
+  .meta-item .meta-value{font-size:13.5px; font-weight:700; color:var(--navy);}
+
+  /* Section headers — full colored bar, poster-style */
+  .section-title{
+    display:flex;
+    align-items:center;
+    gap:11px;
+    margin:30px 0 16px;
+    padding:12px 16px;
+    border-radius:12px;
+    background:var(--navy);
+  }
+  .section-title.alt{background:var(--orange);}
+  .section-badge{
+    width:26px; height:26px; border-radius:50%;
+    background:rgba(255,255,255,0.22); color:var(--white);
+    display:flex; align-items:center; justify-content:center;
+    font-size:12px; font-weight:800;
+    flex-shrink:0;
+    font-variant-numeric:tabular-nums;
+  }
+  .section-title h2{
+    font-size:15.5px;
+    font-weight:700;
+    color:var(--white);
+    margin:0;
+  }
+
+  /* Card / question block */
+  .card{
+    background:var(--white);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:20px 22px;
+    margin-bottom:12px;
+    box-shadow:0 2px 10px rgba(22,35,92,0.04);
+  }
+  .q-label{
+    font-size:14.5px;
+    font-weight:700;
+    color:var(--ink);
+    margin-bottom:4px;
+    display:flex;
+    align-items:flex-start;
+    gap:6px;
+  }
+  .q-label .req{color:var(--pink); font-weight:700;}
+  .q-desc{
+    font-size:12.5px;
+    color:var(--slate);
+    margin:0 0 12px;
+  }
+  input[type="text"], select, textarea{
+    width:100%;
+    font-family:inherit;
+    font-size:14.5px;
+    color:var(--ink);
+    background:var(--paper);
+    border:1.5px solid var(--line);
+    border-radius:10px;
+    padding:10px 12px;
+    outline:none;
+    transition:border-color .15s ease, background .15s ease;
+  }
+  input[type="text"]:focus, select:focus, textarea:focus{
+    border-color:var(--blue);
+    background:var(--white);
+  }
+  textarea{resize:vertical; min-height:80px;}
+  select{appearance:none; -webkit-appearance:none; cursor:pointer;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23697386' stroke-width='2'><path d='M6 9l6 6 6-6'/></svg>");
+    background-repeat:no-repeat;
+    background-position:right 13px center;
+    padding-right:36px;
+  }
+  .radio-group{display:flex; flex-direction:column; gap:8px;}
+  .radio-item{
+    display:flex; align-items:center; gap:11px;
+    border:1.5px solid var(--line);
+    border-radius:10px;
+    padding:10px 13px;
+    cursor:pointer;
+    font-size:14px;
+    transition:border-color .15s ease, background .15s ease;
+  }
+  .radio-item:hover{border-color:#BFD3F7;}
+  .radio-item.checked{border-color:var(--blue); background:var(--blue-tint);}
+  .radio-item input{position:absolute; opacity:0; width:0; height:0;}
+  .check-icon{
+    width:21px; height:21px; border-radius:50%;
+    border:1.5px solid var(--line);
+    display:flex; align-items:center; justify-content:center;
+    font-size:12px; font-weight:800; color:transparent;
+    flex-shrink:0;
+    background:var(--white);
+    transition:background .15s ease, border-color .15s ease;
+  }
+  .check-icon::after{content:"✓";}
+  .radio-item.checked .check-icon{background:var(--blue); border-color:var(--blue); color:var(--white);}
+  .other-input{margin-top:8px; display:none;}
+  .other-input.show{display:block;}
+
+  .error-msg{
+    font-size:12.5px;
+    color:var(--danger);
+    margin-top:7px;
+    display:none;
+  }
+  .error-msg.show{display:block;}
+  .card.invalid{border-color:var(--danger);}
+
+  /* Coach info trigger — vibrant pink CTA, since this is something the user must click */
+  .coach-info-btn{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+    width:100%;
+    background:var(--pink);
+    color:var(--white);
+    border:none;
+    border-radius:14px;
+    padding:15px 18px;
+    font-size:14.5px;
+    font-weight:700;
+    cursor:pointer;
+    margin-bottom:20px;
+    box-shadow:0 6px 16px rgba(255,77,121,0.28);
+  }
+  .coach-info-btn:hover{background:#E63E6C;}
+  .coach-info-btn .idx-tag{
+    font-size:10.5px; font-weight:800; letter-spacing:.06em;
+    color:var(--white); border:1px solid rgba(255,255,255,0.6); border-radius:4px;
+    padding:2px 6px; margin-right:8px;
+  }
+  .coach-info-btn .arrow{font-size:15px;}
+
+  /* Modal */
+  .modal-overlay{
+    position:fixed; inset:0;
+    background:rgba(22,35,92,0.55);
+    display:none;
+    align-items:flex-end;
+    justify-content:center;
+    z-index:1000;
+  }
+  .modal-overlay.show{display:flex;}
+  .modal{
+    background:var(--paper);
+    width:100%;
+    max-width:720px;
+    max-height:86vh;
+    border-radius:20px 20px 0 0;
+    display:flex;
+    flex-direction:column;
+  }
+  @media (min-width:760px){
+    .modal-overlay{align-items:center;}
+    .modal{border-radius:20px; max-height:80vh;}
+  }
+  .modal-header{
+    padding:18px 22px 14px;
+    border-bottom:1px solid var(--line);
+    display:flex; align-items:center; justify-content:space-between;
+    flex-shrink:0;
+    background:var(--white);
+    border-radius:20px 20px 0 0;
+  }
+  .modal-header h3{font-size:15px; font-weight:800; color:var(--navy); margin:0;}
+  .modal-header .modal-sub{font-size:11px; color:var(--pink); font-weight:700;}
+  .modal-desc{padding:14px 22px 0; font-size:13px; color:var(--slate); background:var(--white);}
+  .modal-close{
+    background:var(--paper); border:none; color:var(--navy);
+    width:28px; height:28px; border-radius:50%; font-size:14px; cursor:pointer;
+  }
+  .modal-search{padding:14px 22px; border-bottom:1px solid var(--line); flex-shrink:0; background:var(--white);}
+  .modal-body{overflow-y:auto; padding:14px 22px 22px;}
+  .coach-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:12px;
+  }
+  @media (max-width:560px){
+    .coach-grid{grid-template-columns:1fr;}
+  }
+  .coach-row{
+    padding:16px 18px;
+    border-radius:14px;
+    background:var(--white);
+    box-shadow:0 2px 10px rgba(22,35,92,0.05);
+    border-top:3px solid var(--blue);
+  }
+  .coach-row-head{
+    display:flex;
+    align-items:baseline;
+    gap:10px;
+    margin-bottom:12px;
+    padding-bottom:11px;
+    border-bottom:1px solid var(--line);
+    flex-wrap:wrap;
+  }
+  .coach-num-badge{
+    width:32px; height:32px; border-radius:50%;
+    background:var(--blue); color:var(--white);
+    display:flex; align-items:center; justify-content:center;
+    font-size:12px; font-weight:800;
+    flex-shrink:0;
+    font-variant-numeric:tabular-nums;
+  }
+  .coach-name{font-size:15.5px; font-weight:800; color:var(--navy); margin:0;}
+  .coach-field-row{
+    display:grid;
+    grid-template-columns:64px 1fr;
+    column-gap:12px;
+    padding:6px 0;
+  }
+  .coach-field-label{
+    font-size:10.5px; font-weight:700; letter-spacing:.06em; text-transform:uppercase;
+    color:var(--slate);
+    padding-top:2px;
+  }
+  .coach-field-value{
+    font-size:13px; color:var(--ink);
+    line-height:1.5;
+  }
+  .no-result{padding:30px 0; text-align:center; color:var(--slate); font-size:13.5px;}
+
+  .picked-badge{
+    font-size:10.5px; font-weight:800; color:var(--white);
+    background:var(--blue); border-radius:999px; padding:3px 9px;
+    margin-left:auto; white-space:nowrap;
+  }
+  .coach-choice-btns{
+    display:flex; gap:8px; margin-top:14px; padding-top:12px;
+    border-top:1px solid var(--line);
+  }
+  .choice-btn{
+    flex:1; border:1.5px solid var(--line); background:var(--paper);
+    color:var(--navy); font-size:12.5px; font-weight:700;
+    border-radius:9px; padding:8px 6px; cursor:pointer;
+    transition:border-color .15s ease, background .15s ease, color .15s ease;
+  }
+  .choice-btn:hover{border-color:#BFD3F7;}
+  .choice-btn.active{background:var(--blue); border-color:var(--blue); color:var(--white);}
+
+  /* Submit */
+  .submit-wrap{margin-top:30px; padding-top:20px;}
+  .submit-btn{
+    width:100%;
+    background:var(--blue);
+    color:var(--white);
+    border:none;
+    border-radius:14px;
+    padding:16px;
+    font-size:16px;
+    font-weight:800;
+    cursor:pointer;
+    box-shadow:0 8px 20px rgba(47,111,237,0.32);
+    transition:background .15s ease, transform .1s ease;
+  }
+  .submit-btn:hover{background:#2559C7;}
+  .submit-btn:active{transform:scale(.99);}
+  .submit-note{font-size:12px; color:var(--slate); text-align:center; margin-top:10px;}
+  .submit-fail{
+    display:none;
+    background:var(--pink-tint); color:var(--danger); font-weight:700; font-size:13.5px;
+    border-radius:12px; padding:12px 16px; margin-bottom:14px; text-align:center;
+  }
+  .submit-fail.show{display:block;}
+
+  /* Success screen */
+  .success-screen{
+    max-width:480px; margin:80px auto; text-align:center; padding:0 20px;
+  }
+  .success-icon{
+    width:60px; height:60px; border-radius:50%;
+    background:var(--blue); color:var(--white);
+    display:flex; align-items:center; justify-content:center;
+    font-size:26px; margin:0 auto 22px;
+    font-weight:800;
+    box-shadow:0 8px 20px rgba(47,111,237,0.35);
+  }
+  .success-screen h2{font-size:19px; color:var(--white); margin:0 0 10px;}
+  .success-screen p{font-size:14px; color:rgba(255,255,255,0.75);}
+
+  /* Admin */
+  .admin-wrap{max-width:1100px; margin:0 auto; padding:36px 20px 80px; background:var(--paper); min-height:100vh;}
+  .admin-header{display:flex; justify-content:space-between; align-items:center; margin-bottom:20px; flex-wrap:wrap; gap:12px;}
+  .admin-header h1{font-size:18px; color:var(--navy); margin:0;}
+  .admin-btn{
+    background:var(--blue); color:var(--white); border:none; border-radius:10px;
+    padding:10px 16px; font-size:13.5px; font-weight:700; cursor:pointer;
+  }
+  .admin-btn:hover{background:#2559C7;}
+  table.admin-table{width:100%; border-collapse:collapse; background:var(--white); border-radius:12px; overflow:hidden; box-shadow:0 2px 12px rgba(22,35,92,0.06);}
+  table.admin-table th{background:var(--navy); color:var(--white); font-size:11.5px; font-weight:800; padding:10px 12px; text-align:left; white-space:nowrap;}
+  table.admin-table td{font-size:12.5px; padding:10px 12px; border-bottom:1px solid var(--line); vertical-align:top;}
+  table.admin-table tr:last-child td{border-bottom:none;}
+  .empty-admin{padding:60px 0; text-align:center; color:var(--slate);}
+
+  /* Admin login */
+  .admin-login{max-width:360px; margin:120px auto; background:var(--white); border-radius:16px; padding:28px 26px; box-shadow:0 8px 24px rgba(22,35,92,0.08);}
+  .admin-login h2{font-size:16px; color:var(--navy); margin:0 0 16px;}
+  .admin-login .error-msg{margin-top:10px;}
+</style>
+</head>
+<body>
+
+<div id="app"></div>
+
+<!-- Coach info modal -->
+<div class="modal-overlay" id="coachModal">
+  <div class="modal">
+    <div class="modal-header">
+      <div>
+        <h3>코치진 안내</h3>
+        <span class="modal-sub">FIELD REFERENCE · 총 38명</span>
+      </div>
+      <button class="modal-close" id="closeModal">✕</button>
+    </div>
+    <div class="modal-desc">아래 프로필을 보고 코칭 받기를 희망하는 코치 1,2,3순위를 선택해주세요.</div>
+    <div class="modal-search">
+      <input type="text" id="coachSearch" placeholder="이름, 소속, 직무, 전공, 경력사항으로 검색">
+    </div>
+    <div class="modal-body" id="coachList"></div>
+  </div>
+</div>
+
+<script>
+const COACHES = [
+{n:1,name:"고은",org:"삼성전자",job:"상품기획",career:"가격관리, 개발 관리",major:"기술경영"},
+{n:2,name:"구남규",org:"삼성전자",job:"반도체인프라, 품질, 신규라인건설",career:"인프라품질, 반도체라인 건설",major:"화학공학"},
+{n:3,name:"구도일",org:"삼성전자",job:"연구개발(제품개발)",career:"스마트폰 개발 PL",major:"전파공학과"},
+{n:4,name:"김문규",org:"삼성전자",job:"상생협력 컨설팅",career:"경영기획, 경영혁신, SCM, Global Operation, Global Sourcing",major:"기계공학 전공"},
+{n:5,name:"김상종",org:"삼성전자",job:"연구개발(연구소)",career:"법무, 기술기획",major:"화학공학과, 법학과"},
+{n:6,name:"김세연",org:"삼성전자",job:"연구개발(기술그룹)",career:"소재개발, 반도체 화학분석",major:"화학부 생화학전공"},
+{n:7,name:"김수한",org:"삼성전자",job:"연구개발(pjt관리)",career:"인사(조직문화·교육)",major:"전자공학(석사), MBA 인사조직·코칭(석사)"},
+{n:8,name:"김은아",org:"삼성전자",job:"마케팅",career:"기획, MI, 상품기획",major:"통계학"},
+{n:9,name:"김장혁",org:"삼성전자",job:"서비스/콘텐츠 기획",career:"마케팅 기획, 시장조사, 해외영업관리, 국내소매유통",major:"전자공학 전공"},
+{n:10,name:"김종현",org:"삼성전자",job:"TEST기술",career:"반도체 품질, 반도체 테스트 기술, 중국 주재원",major:"전자공학 전공(학사), IT비즈니스·코칭 전공(석사)"},
+{n:11,name:"김태봉",org:"삼성전자",job:"마케팅",career:"인사, 교육, 경영진단",major:"역사교육 전공"},
+{n:12,name:"김희영",org:"삼성전자",job:"기술전략",career:"SW개발",major:"컴퓨터공학"},
+{n:13,name:"문채영",org:"삼성전자",job:"PM",career:"신기술전략, 신사업기획, PM 다수(삼성페이, 광고, 게임 등)",major:"생물학 전공"},
+{n:14,name:"민재원",org:"삼성전자",job:"연구개발(기술그룹)",career:"메모리 양산개발",major:"기계공학 학사, 반도체공학 석사"},
+{n:15,name:"박대진",org:"삼성전자",job:"DS 정보보호",career:"영업마케팅",major:"재료공학 전공"},
+{n:16,name:"박상구",org:"삼성전자",job:"품질",career:"반도체 소자 신뢰성",major:"전자공학"},
+{n:17,name:"박재영",org:"삼성전자",job:"마케팅",career:"인사, 영업, PM",major:"MBA"},
+{n:18,name:"박현미",org:"삼성전자",job:"UX특허",career:"UX디자인",major:"컴퓨터공학 / 상담심리"},
+{n:19,name:"박혜준",org:"삼성전자",job:"영업관리, 교육",career:"법인영업",major:"경영학 전공, 가족상담학 전공"},
+{n:20,name:"서정현",org:"삼성전기",job:"인재개발(교육)",career:"전사 인사팀 근무이력",major:"전파통신공학 전공"},
+{n:21,name:"설도환",org:"삼성전자",job:"DS 스마트팩토리 구축",career:"연구개발, 상품기획",major:"전기공학 전공"},
+{n:22,name:"손경임",org:"삼성전자",job:"무역, 수출, 수입, 구매",career:"무역, 수출, 수입, 구매, 오퍼상 업무",major:"경제학부, 상담심리 전공"},
+{n:23,name:"신미영",org:"삼성전자",job:"마케팅",career:"콘텐츠 & 서비스 기획, 현재는 제품 런칭 마케팅",major:"정보통신공학"},
+{n:24,name:"신자영",org:"삼성전자",job:"데이터센터 인프라 기획",career:"설계 EDA 시뮬레이션",major:"컴퓨터공학"},
+{n:25,name:"신정호",org:"삼성전자",job:"마케팅 커뮤니케이션",career:"광고회사 Account Planner",major:"광고"},
+{n:26,name:"안나은",org:"삼성전자",job:"인재개발",career:"경영지원, 마케팅",major:"교육공학 학사, 경영학 석사"},
+{n:27,name:"안혜경",org:"삼성전자",job:"연구개발(제품개발)",career:"개발업무",major:"기계공학"},
+{n:28,name:"이미정",org:"삼성전자",job:"인재개발",career:"연구개발, 구매",major:"컴퓨터과학과"},
+{n:29,name:"이병언",org:"삼성전자",job:"연구개발(연구소)",career:"Data Scientist",major:"산업공학"},
+{n:30,name:"이종문",org:"삼성전자",job:"인재개발(HRD) 사내교수",career:"연구개발(R&D), Sales Engineering, 마케팅, 주재원",major:"기계공학"},
+{n:31,name:"이종민",org:"삼성디스플레이",job:"인재개발",career:"인사(인사제도, 인력운영, 해외인사)",major:"학부 경영학, MBA(코칭·인사조직), 박사수료(산업및조직심리학)"},
+{n:32,name:"임동찬",org:"삼성전자",job:"연구개발(연구소)",career:"연구개발",major:"세라믹공학"},
+{n:33,name:"정왕식",org:"삼성전자",job:"영업",career:"HW개발 및 MX/DA사업부, 해외주재 경험(덴마크/영국/미국)",major:"전자전기공학"},
+{n:34,name:"정현수",org:"삼성전자",job:"연구개발(설계)",career:"연구개발, 외국계",major:"전자공학"},
+{n:35,name:"조건여",org:"삼성전자",job:"인재개발",career:"SW 개발",major:"기계공학"},
+{n:36,name:"최보우",org:"삼성전자",job:"연구개발(연구소)",career:"없음",major:"세라믹공학"},
+{n:37,name:"최호석",org:"삼성전자",job:"연구개발(SW)",career:"커뮤니티 빌딩, DEI",major:"컴퓨터공학 전공"},
+{n:38,name:"한승희",org:"삼성전자",job:"사내강사",career:"VMD 10년, 사내강사 10년차",major:"멀티미디어 전공"}
+];
+
+const TOPICS = [
+  "진로 방향 및 목표 설정",
+  "대학원 전공·연구 경험의 직무 연결",
+  "희망 산업·기업·직무 탐색",
+  "취업 준비 및 실행계획 수립",
+  "경력전환 및 새로운 가능성 탐색",
+  "일과 삶의 방향에 대한 고민",
+  "기타"
+];
+
+// Google Apps Script 웹 앱 배포 URL로 교체하세요.
+// (Apps Script 편집기 > 배포 > 새 배포 > 웹 앱 배포 후 나오는 URL)
+const API_URL = "https://script.google.com/macros/s/AKfycbxnWyCJKVBNxaHlxv1vjXg9QEhqpM0duxOJB71RABQyzDr9_k9muNzYo7k91h8JsEI17A/exec";
+
+async function callApi(payload){
+  const res = await fetch(API_URL, {
+    method: 'POST',
+    headers: {'Content-Type': 'text/plain;charset=utf-8'},
+    body: JSON.stringify(payload)
+  });
+  return res.json();
+}
+
+function maskName(name){
+  if(!name) return name;
+  const n = name.trim();
+  if(n.length <= 2) return n.charAt(0) + '*';
+  return n.charAt(0) + '*'.repeat(n.length-2) + n.charAt(n.length-1);
+}
+
+function coachOptionLabel(c){
+  return `${maskName(c.name)} (${c.org} · ${c.job} · ${c.major})`;
+}
+
+function getCurrentChoices(){
+  return [
+    (document.getElementById('q_choice1')||{}).value || '',
+    (document.getElementById('q_choice2')||{}).value || '',
+    (document.getElementById('q_choice3')||{}).value || ''
+  ];
+}
+
+function setChoiceFromModal(coachVal, slot){
+  const sels = [document.getElementById('q_choice1'), document.getElementById('q_choice2'), document.getElementById('q_choice3')];
+  const target = sels[slot-1];
+  if(target.value === coachVal){
+    target.value = '';
+  } else {
+    sels.forEach((sel, idx)=>{
+      if(idx+1 !== slot && sel.value === coachVal) sel.value = '';
+    });
+    refreshDropdowns();
+    target.value = coachVal;
+  }
+  refreshDropdowns();
+  document.getElementById('err_choice' + slot).classList.remove('show');
+  target.closest('.card').classList.remove('invalid');
+  renderCoachList(document.getElementById('coachSearch').value);
+}
+
+function renderCoachList(filter){
+  const list = document.getElementById('coachList');
+  const f = (filter||"").trim().toLowerCase();
+  const filtered = COACHES.filter(c=>{
+    if(!f) return true;
+    return (c.name+c.org+c.job+c.career+c.major+("코치"+c.n)).toLowerCase().includes(f);
+  });
+  if(filtered.length===0){
+    list.innerHTML = '<div class="no-result">검색 결과가 없습니다.</div>';
+    return;
+  }
+  const currentChoices = getCurrentChoices();
+  list.innerHTML = '<div class="coach-grid">' + filtered.map(c=>{
+    const val = '코치 ' + c.n;
+    const pickedSlot = currentChoices.indexOf(val);
+    return `
+    <div class="coach-row">
+      <div class="coach-row-head">
+        <span class="coach-num-badge">${String(c.n).padStart(2,'0')}</span>
+        <p class="coach-name">${maskName(c.name)}</p>
+        ${pickedSlot>=0 ? `<span class="picked-badge">${pickedSlot+1}순위 선택됨</span>` : ''}
+      </div>
+      <div class="coach-field-row">
+        <div class="coach-field-label">소속</div>
+        <div class="coach-field-value">${c.org}</div>
+      </div>
+      <div class="coach-field-row">
+        <div class="coach-field-label">직무</div>
+        <div class="coach-field-value">${c.job}</div>
+      </div>
+      <div class="coach-field-row">
+        <div class="coach-field-label">전공</div>
+        <div class="coach-field-value">${c.major}</div>
+      </div>
+      <div class="coach-field-row">
+        <div class="coach-field-label">경력사항</div>
+        <div class="coach-field-value">${c.career}</div>
+      </div>
+      <div class="coach-choice-btns">
+        <button type="button" class="choice-btn${pickedSlot===0?' active':''}" data-coach="${val}" data-slot="1">1순위</button>
+        <button type="button" class="choice-btn${pickedSlot===1?' active':''}" data-coach="${val}" data-slot="2">2순위</button>
+        <button type="button" class="choice-btn${pickedSlot===2?' active':''}" data-coach="${val}" data-slot="3">3순위</button>
+      </div>
+    </div>
+  `;
+  }).join('') + '</div>';
+}
+
+function openModal(){
+  renderCoachList('');
+  document.getElementById('coachSearch').value = '';
+  document.getElementById('coachModal').classList.add('show');
+}
+function closeModal(){
+  document.getElementById('coachModal').classList.remove('show');
+}
+
+document.getElementById('closeModal').addEventListener('click', closeModal);
+document.getElementById('coachModal').addEventListener('click', (e)=>{
+  if(e.target.id === 'coachModal') closeModal();
+});
+document.getElementById('coachSearch').addEventListener('input', (e)=>{
+  renderCoachList(e.target.value);
+});
+document.getElementById('coachList').addEventListener('click', (e)=>{
+  const btn = e.target.closest('.choice-btn');
+  if(!btn) return;
+  setChoiceFromModal(btn.dataset.coach, Number(btn.dataset.slot));
+});
+
+function buildCoachOptions(excludeValues){
+  excludeValues = excludeValues || [];
+  let opts = '<option value="">선택해 주세요</option>';
+  COACHES.forEach(c=>{
+    const val = "코치 " + c.n;
+    if(excludeValues.includes(val)) return;
+    opts += `<option value="${val}">${coachOptionLabel(c)}</option>`;
+  });
+  return opts;
+}
+
+function refreshDropdowns(){
+  const sel1 = document.getElementById('q_choice1');
+  const sel2 = document.getElementById('q_choice2');
+  const sel3 = document.getElementById('q_choice3');
+  if(!sel1 || !sel2 || !sel3) return;
+
+  const prev1 = sel1.value, prev2 = sel2.value, prev3 = sel3.value;
+
+  sel1.innerHTML = buildCoachOptions([prev2, prev3].filter(Boolean));
+  sel2.innerHTML = buildCoachOptions([prev1, prev3].filter(Boolean));
+  sel3.innerHTML = buildCoachOptions([prev1, prev2].filter(Boolean));
+
+  sel1.value = prev1; sel2.value = prev2; sel3.value = prev3;
+}
+
+function renderSurvey(){
+  const app = document.getElementById('app');
+  app.innerHTML = `
+  <div class="band">
+    <span class="star s1">✦</span>
+    <span class="star s2">✧</span>
+    <span class="star s3">✦</span>
+    <span class="star s4">✧</span>
+    <span class="dot d1"></span>
+    <span class="dot d2"></span>
+  </div>
+  <div class="wrap">
+  <div class="sheet">
+    <div class="sheet-inner">
+    <div class="hero">
+      <span class="eyebrow">삼성그룹 현직자</span>
+      <h1>서울대학교 대학원생<br>현직자 1:1 커리어코칭 프로그램<br><span class="accent">희망코치진 설문조사</span></h1>
+      <div class="hero-dots"><span></span><span></span><span></span></div>
+    </div>
+
+    <div class="intro-block">
+      <p>안녕하세요.<br>삼성그룹 현직 코치진과 함께하는 1:1 커리어코칭 프로그램을 위탁 운영하고 있는 ㈜클립스컨설팅입니다.</p>
+      <p>본 설문은 참여자의 주요 고민과 희망 코치를 확인하여 <strong>코칭 매칭에 활용하기 위한 설문</strong>입니다. 첨부된 코치진 안내 자료를 확인한 후, <strong>희망하는 코치를 1순위부터 3순위까지 선택해 주세요.</strong></p>
+      <p>코치의 경우, 희망 순위, 코칭 주제와의 적합성, 코치별 일정 및 배정 가능 인원 등을 종합적으로 고려하여 <strong>최종 매칭될 예정입니다.</strong></p>
+      <div class="notice"><span class="notice-icon">!</span><span>희망하는 코치와의 매칭이 어려울 수 있으며, 경우에 따라 다른 코치가 배정될 수 있습니다.</span></div>
+      <div class="meta-row">
+        <div class="meta-item">
+          <span class="meta-icon">🗓️</span>
+          <span class="meta-text"><span class="meta-label">응답기한</span><span class="meta-value">2026.09.09(화) 오전 11시</span></span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-icon">⏱️</span>
+          <span class="meta-text"><span class="meta-label">예상 소요시간</span><span class="meta-value">약 5분</span></span>
+        </div>
+      </div>
+    </div>
+
+    <form id="surveyForm">
+      <div class="section-title"><span class="section-badge">01</span><h2>나의 정보 입력</h2></div>
+
+      <div class="card">
+        <div class="q-label">1. 성명 <span class="req">*</span></div>
+        <input type="text" id="q_name" autocomplete="off">
+        <div class="error-msg" id="err_name">성명을 입력해 주세요.</div>
+      </div>
+
+      <div class="card">
+        <div class="q-label">2. 학번 <span class="req">*</span></div>
+        <input type="text" id="q_studentId" autocomplete="off">
+        <div class="error-msg" id="err_studentId">학번을 입력해 주세요.</div>
+      </div>
+
+      <div class="card">
+        <div class="q-label">3. 소속 대학원 및 학과(전공) <span class="req">*</span></div>
+        <div class="q-desc">예시. ○○대학(원) ○○과</div>
+        <input type="text" id="q_dept" autocomplete="off" placeholder="○○대학(원) ○○과">
+        <div class="error-msg" id="err_dept">소속 대학원 및 학과를 입력해 주세요.</div>
+      </div>
+
+      <div class="section-title"><span class="section-badge">02</span><h2>희망 코치 선택</h2></div>
+
+      <button type="button" class="coach-info-btn" id="openModalBtn">
+        <span><span class="idx-tag">2-1</span>전체 코치 프로필 확인 및 선택하기 (전체 38명)</span>
+        <span class="arrow">→</span>
+      </button>
+
+      <div class="section-title"><span class="section-badge">03</span><h2>희망코치 선택 이유</h2></div>
+
+      <div class="card">
+        <div class="q-label">4-1. 희망 코치 1순위 <span class="req">*</span></div>
+        <select id="q_choice1"></select>
+        <div class="error-msg" id="err_choice1">1순위 코치를 선택해 주세요.</div>
+      </div>
+      <div class="card">
+        <div class="q-label">4-2. 1순위 코치를 선택한 이유를 작성해 주세요. <span class="req">*</span></div>
+        <div class="q-desc">코치의 소속, 직무 또는 경력 중 본인의 고민과 연결되는 부분을 중심으로 작성해 주세요.</div>
+        <textarea id="q_reason1"></textarea>
+        <div class="error-msg" id="err_reason1">선택 이유를 작성해 주세요.</div>
+      </div>
+
+      <div class="card">
+        <div class="q-label">5-1. 희망 코치 2순위 <span class="req">*</span></div>
+        <select id="q_choice2"></select>
+        <div class="error-msg" id="err_choice2">2순위 코치를 선택해 주세요.</div>
+      </div>
+      <div class="card">
+        <div class="q-label">5-2. 2순위 코치를 선택한 이유를 작성해 주세요. <span class="req">*</span></div>
+        <div class="q-desc">코치의 소속, 직무 또는 경력 중 본인의 고민과 연결되는 부분을 중심으로 작성해 주세요.</div>
+        <textarea id="q_reason2"></textarea>
+        <div class="error-msg" id="err_reason2">선택 이유를 작성해 주세요.</div>
+      </div>
+
+      <div class="card">
+        <div class="q-label">6-1. 희망 코치 3순위 <span class="req">*</span></div>
+        <select id="q_choice3"></select>
+        <div class="error-msg" id="err_choice3">3순위 코치를 선택해 주세요.</div>
+      </div>
+      <div class="card">
+        <div class="q-label">6-2. 3순위 코치를 선택한 이유를 작성해 주세요. <span class="req">*</span></div>
+        <div class="q-desc">코치의 소속, 직무 또는 경력 중 본인의 고민과 연결되는 부분을 중심으로 작성해 주세요.</div>
+        <textarea id="q_reason3"></textarea>
+        <div class="error-msg" id="err_reason3">선택 이유를 작성해 주세요.</div>
+      </div>
+
+      <div class="card">
+        <div class="q-label">7. 이번 1:1 코칭에서 가장 다루고 싶은 주제를 선택해 주세요. <span class="req">*</span></div>
+        <div class="radio-group" id="topicGroup"></div>
+        <input type="text" id="q_topicOther" class="other-input" placeholder="다루고 싶은 주제를 직접 입력해 주세요">
+        <div class="error-msg" id="err_topic">주제를 선택해 주세요.</div>
+      </div>
+
+      <div class="card">
+        <div class="q-label">8. 코치별 일정과 배정 가능 인원에 따라 희망 순위와 다른 코치가 배정될 수 있습니다. <span class="req">*</span></div>
+        <div class="radio-group" id="ackGroup">
+          <label class="radio-item">
+            <span class="check-icon"></span>
+            <input type="radio" name="ack" value="네, 이해하였습니다.">
+            <span>네, 이해하였습니다.</span>
+          </label>
+        </div>
+        <div class="error-msg" id="err_ack">내용을 확인 후 체크해 주세요.</div>
+      </div>
+
+      <div class="submit-wrap">
+        <div class="submit-fail" id="submitFail"></div>
+        <button type="submit" class="submit-btn" id="submitBtn">설문 제출하기</button>
+        <div class="submit-note">제출 후에는 응답 내용을 수정할 수 없습니다.</div>
+      </div>
+    </form>
+    </div>
+  </div>
+  </div>
+  `;
+
+  // populate topic radios
+  const topicGroup = document.getElementById('topicGroup');
+  topicGroup.innerHTML = TOPICS.map((t,i)=>`
+    <label class="radio-item" data-value="${t}">
+      <span class="check-icon"></span>
+      <input type="radio" name="topic" value="${t}">
+      <span>${t}${t==='기타' ? ' (직접 입력)' : ''}</span>
+    </label>
+  `).join('');
+
+  topicGroup.querySelectorAll('.radio-item').forEach(item=>{
+    item.addEventListener('click', ()=>{
+      topicGroup.querySelectorAll('.radio-item').forEach(i=>i.classList.remove('checked'));
+      item.classList.add('checked');
+      const otherBox = document.getElementById('q_topicOther');
+      if(item.dataset.value === '기타'){
+        otherBox.classList.add('show');
+      } else {
+        otherBox.classList.remove('show');
+        otherBox.value='';
+      }
+    });
+  });
+
+  document.getElementById('ackGroup').querySelectorAll('.radio-item').forEach(item=>{
+    item.addEventListener('click', ()=>{
+      document.getElementById('ackGroup').querySelectorAll('.radio-item').forEach(i=>i.classList.remove('checked'));
+      item.classList.add('checked');
+    });
+  });
+
+  // populate coach dropdowns with dynamic exclusion
+  refreshDropdowns();
+  ['q_choice1','q_choice2','q_choice3'].forEach(id=>{
+    document.getElementById(id).addEventListener('change', refreshDropdowns);
+  });
+
+  document.getElementById('openModalBtn').addEventListener('click', openModal);
+
+  document.getElementById('surveyForm').addEventListener('submit', handleSubmit);
+}
+
+function clearErrors(){
+  document.querySelectorAll('.error-msg').forEach(e=>e.classList.remove('show'));
+  document.querySelectorAll('.card').forEach(c=>c.classList.remove('invalid'));
+  const fail = document.getElementById('submitFail');
+  if(fail){ fail.classList.remove('show'); fail.textContent=''; }
+}
+
+function showError(errId, cardEl){
+  document.getElementById(errId).classList.add('show');
+  if(cardEl) cardEl.classList.add('invalid');
+}
+
+async function handleSubmit(e){
+  e.preventDefault();
+  clearErrors();
+  let valid = true;
+
+  const name = document.getElementById('q_name').value.trim();
+  const studentId = document.getElementById('q_studentId').value.trim();
+  const dept = document.getElementById('q_dept').value.trim();
+  const topicChecked = document.querySelector('input[name="topic"]:checked');
+  const topicOther = document.getElementById('q_topicOther').value.trim();
+  const choice1 = document.getElementById('q_choice1').value;
+  const reason1 = document.getElementById('q_reason1').value.trim();
+  const choice2 = document.getElementById('q_choice2').value;
+  const reason2 = document.getElementById('q_reason2').value.trim();
+  const choice3 = document.getElementById('q_choice3').value;
+  const reason3 = document.getElementById('q_reason3').value.trim();
+  const ackChecked = document.querySelector('input[name="ack"]:checked');
+
+  if(!name){ showError('err_name', document.getElementById('q_name').closest('.card')); valid=false; }
+  if(!studentId){ showError('err_studentId', document.getElementById('q_studentId').closest('.card')); valid=false; }
+  if(!dept){ showError('err_dept', document.getElementById('q_dept').closest('.card')); valid=false; }
+  if(!topicChecked){
+    showError('err_topic', document.getElementById('topicGroup').closest('.card')); valid=false;
+  } else if(topicChecked.value === '기타' && !topicOther){
+    document.getElementById('err_topic').textContent = '기타 주제를 직접 입력해 주세요.';
+    showError('err_topic', document.getElementById('topicGroup').closest('.card')); valid=false;
+  }
+  if(!choice1){ showError('err_choice1', document.getElementById('q_choice1').closest('.card')); valid=false; }
+  if(!reason1){ showError('err_reason1', document.getElementById('q_reason1').closest('.card')); valid=false; }
+  if(!choice2){ showError('err_choice2', document.getElementById('q_choice2').closest('.card')); valid=false; }
+  if(!reason2){ showError('err_reason2', document.getElementById('q_reason2').closest('.card')); valid=false; }
+  if(!choice3){ showError('err_choice3', document.getElementById('q_choice3').closest('.card')); valid=false; }
+  if(!reason3){ showError('err_reason3', document.getElementById('q_reason3').closest('.card')); valid=false; }
+  if(!ackChecked){ showError('err_ack', document.getElementById('ackGroup').closest('.card')); valid=false; }
+
+  if(!valid){
+    document.querySelector('.card.invalid, .error-msg.show')?.scrollIntoView({behavior:'smooth', block:'center'});
+    return;
+  }
+
+  const submitBtn = document.getElementById('submitBtn');
+  submitBtn.disabled = true;
+  submitBtn.textContent = '제출 중...';
+
+  const record = {
+    name, studentId, dept,
+    topic: topicChecked.value === '기타' ? `기타: ${topicOther}` : topicChecked.value,
+    choice1, reason1, choice2, reason2, choice3, reason3,
+    ack: ackChecked.value
+  };
+
+  try{
+    const data = await callApi(record);
+    if(data.error){
+      const err = new Error(data.error);
+      err.code = data.error;
+      throw err;
+    }
+    renderSuccess(record);
+  }catch(err){
+    submitBtn.disabled = false;
+    submitBtn.textContent = '설문 제출하기';
+    let msg = '제출 중 오류가 발생했습니다. 잠시 후 다시 시도해 주세요.';
+    if(err && err.code === 'invalid_input'){
+      msg = '입력값을 다시 확인해 주세요.';
+    } else if(!navigator.onLine){
+      msg = '인터넷 연결을 확인한 후 다시 시도해 주세요.';
+    }
+    const fail = document.getElementById('submitFail');
+    if(fail){
+      fail.textContent = msg;
+      fail.classList.add('show');
+      fail.scrollIntoView({behavior:'smooth', block:'center'});
+    }
+    console.error(err);
+  }
+}
+
+function renderSuccess(record){
+  const app = document.getElementById('app');
+  app.innerHTML = `
+  <div class="success-screen">
+    <div class="success-icon">✓</div>
+    <h2>설문 제출이 완료되었습니다</h2>
+    <p>설문에 응답해주셔서 감사드립니다.<br>코치 매칭 현황은 순차적으로 전달드릴 예정이오니, 참고해주시면 감사하겠습니다.</p>
+  </div>
+  `;
+}
+
+// ---- Admin view (?admin=1) ----
+function renderAdminLogin(prevError){
+  const app = document.getElementById('app');
+  app.innerHTML = `
+  <div class="admin-login">
+    <h2>관리자 로그인</h2>
+    <input type="text" id="adminToken" placeholder="관리자 토큰을 입력하세요" autocomplete="off">
+    <div class="error-msg${prevError ? ' show' : ''}" id="adminLoginErr">${prevError || '토큰이 올바르지 않습니다.'}</div>
+    <button class="admin-btn" id="adminLoginBtn" style="width:100%; margin-top:14px;">확인</button>
+  </div>
+  `;
+  const submit = async ()=>{
+    const token = document.getElementById('adminToken').value.trim();
+    if(!token) return;
+    sessionStorage.setItem('adminToken', token);
+    await renderAdmin();
+  };
+  document.getElementById('adminLoginBtn').addEventListener('click', submit);
+  document.getElementById('adminToken').addEventListener('keydown', (e)=>{
+    if(e.key === 'Enter') submit();
+  });
+}
+
+async function renderAdmin(){
+  const token = sessionStorage.getItem('adminToken') || '';
+  if(!token){
+    renderAdminLogin();
+    return;
+  }
+
+  const app = document.getElementById('app');
+  app.innerHTML = `
+  <div class="admin-wrap">
+    <div class="admin-header">
+      <h1>희망코치 설문 응답 현황</h1>
+      <div style="display:flex; gap:8px;">
+        <button class="admin-btn" id="refreshBtn" style="background:var(--slate);">새로고침</button>
+        <button class="admin-btn" id="exportBtn">CSV 다운로드</button>
+        <button class="admin-btn" id="deleteAllBtn" style="background:var(--danger);">전체 삭제</button>
+      </div>
+    </div>
+    <div id="deleteConfirm" style="display:none; align-items:center; gap:10px; background:var(--pink-tint); color:var(--danger); font-weight:700; font-size:13px; padding:12px 16px; border-radius:10px; margin-bottom:14px;">
+      <span style="flex:1;">정말로 전체 응답을 삭제하시겠습니까? 이 작업은 되돌릴 수 없습니다.</span>
+      <button class="admin-btn" id="deleteConfirmBtn" style="background:var(--danger);">삭제 확인</button>
+      <button class="admin-btn" id="deleteCancelBtn" style="background:var(--slate);">취소</button>
+    </div>
+    <div id="adminMsg" style="display:none; color:var(--danger); font-size:12.5px; font-weight:700; margin-bottom:12px;"></div>
+    <div id="adminBody">불러오는 중...</div>
+  </div>
+  `;
+  document.getElementById('refreshBtn').addEventListener('click', renderAdmin);
+
+  const deleteConfirm = document.getElementById('deleteConfirm');
+  document.getElementById('deleteAllBtn').addEventListener('click', ()=>{
+    deleteConfirm.style.display = 'flex';
+  });
+  document.getElementById('deleteCancelBtn').addEventListener('click', ()=>{
+    deleteConfirm.style.display = 'none';
+  });
+  document.getElementById('deleteConfirmBtn').addEventListener('click', async ()=>{
+    const btn = document.getElementById('deleteConfirmBtn');
+    btn.disabled = true;
+    btn.textContent = '삭제 중...';
+    try{
+      const data = await callApi({ action: 'deleteAll', token });
+      if(data.error) throw new Error(data.error);
+      await renderAdmin();
+    }catch(err){
+      const adminMsg = document.getElementById('adminMsg');
+      if(adminMsg){
+        adminMsg.textContent = '삭제 중 오류가 발생했습니다. 다시 시도해 주세요.';
+        adminMsg.style.display = 'block';
+      }
+      btn.disabled = false;
+      btn.textContent = '삭제 확인';
+      console.error(err);
+    }
+  });
+
+  const body = document.getElementById('adminBody');
+  let records;
+  try{
+    const res = await fetch(API_URL + '?token=' + encodeURIComponent(token), {cache:'no-store'});
+    const data = await res.json();
+    if(data.error === 'unauthorized'){
+      sessionStorage.removeItem('adminToken');
+      renderAdminLogin('토큰이 올바르지 않습니다.');
+      return;
+    }
+    if(data.error) throw new Error(data.error);
+    records = (data.records || []).slice().sort((a,b)=> new Date(a.submitted_at) - new Date(b.submitted_at));
+  }catch(err){
+    body.innerHTML = '<div class="empty-admin">응답 데이터를 불러오지 못했습니다.</div>';
+    console.error(err);
+    return;
+  }
+
+  if(records.length === 0){
+    body.innerHTML = '<div class="empty-admin">아직 제출된 응답이 없습니다.</div>';
+    return;
+  }
+
+  body.innerHTML = `
+  <div style="overflow-x:auto;">
+    <table class="admin-table">
+      <thead><tr>
+        <th>제출시각</th><th>성명</th><th>학번</th><th>소속</th><th>주제</th>
+        <th>1순위</th><th>1순위 이유</th>
+        <th>2순위</th><th>2순위 이유</th>
+        <th>3순위</th><th>3순위 이유</th>
+      </tr></thead>
+      <tbody>
+        ${records.map(r=>`
+          <tr>
+            <td>${new Date(r.submitted_at).toLocaleString('ko-KR')}</td>
+            <td>${r.name}</td>
+            <td>${r.student_id}</td>
+            <td>${r.dept}</td>
+            <td>${r.topic}</td>
+            <td>${r.choice1}</td>
+            <td>${r.reason1}</td>
+            <td>${r.choice2}</td>
+            <td>${r.reason2}</td>
+            <td>${r.choice3}</td>
+            <td>${r.reason3}</td>
+          </tr>
+        `).join('')}
+      </tbody>
+    </table>
+  </div>
+  `;
+
+  document.getElementById('exportBtn').addEventListener('click', ()=>{
+    const headers = ['제출시각','성명','학번','소속','주제','1순위','1순위이유','2순위','2순위이유','3순위','3순위이유'];
+    const rows = records.map(r=>[
+      new Date(r.submitted_at).toLocaleString('ko-KR'), r.name, r.student_id, r.dept, r.topic,
+      r.choice1, r.reason1, r.choice2, r.reason2, r.choice3, r.reason3
+    ]);
+    const csvContent = [headers, ...rows].map(row =>
+      row.map(cell => `"${String(cell).replace(/"/g,'""')}"`).join(',')
+    ).join('\n');
+    const blob = new Blob(["﻿"+csvContent], {type:'text/csv;charset=utf-8;'});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = '희망코치_설문응답_' + new Date().toISOString().slice(0,10) + '.csv';
+    a.click();
+    URL.revokeObjectURL(url);
+  });
+}
+
+// entry point
+const params = new URLSearchParams(window.location.search);
+if(params.get('admin') === '1'){
+  renderAdmin();
+} else {
+  renderSurvey();
+}
+</script>
+</body>
+</html>
