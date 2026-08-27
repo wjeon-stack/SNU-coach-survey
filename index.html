@@ -563,6 +563,13 @@ function coachOptionLabel(c){
   return `${maskName(c.name)} (${c.org} · ${c.job} · ${c.major})`;
 }
 
+function realCoachLabel(choiceValue){
+  const m = /^코치\s*(\d+)$/.exec((choiceValue||'').trim());
+  if(!m) return choiceValue;
+  const coach = COACHES.find(c => c.n === Number(m[1]));
+  return coach ? coach.name : choiceValue;
+}
+
 function getCurrentChoices(){
   return [
     (document.getElementById('q_choice1')||{}).value || '',
@@ -920,7 +927,9 @@ async function handleSubmit(e){
   const record = {
     name, studentId, dept,
     topic: topicChecked.value === '기타' ? `기타: ${topicOther}` : topicChecked.value,
-    choice1, reason1, choice2, reason2, choice3, reason3,
+    choice1: realCoachLabel(choice1), reason1,
+    choice2: realCoachLabel(choice2), reason2,
+    choice3: realCoachLabel(choice3), reason3,
     ack: ackChecked.value
   };
 
