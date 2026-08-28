@@ -373,7 +373,6 @@
     border:1.5px solid var(--line); border-radius:12px; padding:16px 18px; background:var(--paper);
   }
   .consent-item.checked{border-color:var(--blue); background:var(--blue-tint);}
-  .consent-item.checked .check-icon{background:var(--blue); border-color:var(--blue); color:var(--white);}
   .consent-item.declined{border-color:var(--danger); background:var(--pink-tint);}
   .consent-item-title{font-size:13.5px; font-weight:800; color:var(--navy); margin:0 0 8px;}
   .consent-item-body{font-size:12.5px; color:var(--ink); line-height:1.65;}
@@ -1288,8 +1287,7 @@ async function handleSubmit(e){
     topic: topicChecked.value === '기타' ? `기타: ${topicOther}` : topicChecked.value,
     choice1: realCoachLabel(choice1), reason1,
     choice2: realCoachLabel(choice2), reason2,
-    choice3: realCoachLabel(choice3), reason3,
-    ack: '네, 이해하였습니다.'
+    choice3: realCoachLabel(choice3), reason3
   };
 
   openGuideModal();
@@ -1339,7 +1337,8 @@ function renderGuidePage(){
 }
 
 function openGuideModal(){
-  guidePageIndex = 0;
+  // 실수로 닫았다가 다시 열었을 때는 처음(1페이지)이 아니라
+  // 마지막으로 보던 페이지부터 이어서 보여줍니다.
   document.getElementById('guideModal').classList.add('show');
   renderGuidePage();
 }
@@ -1413,6 +1412,7 @@ function renderConsentBody(){
     cb.addEventListener('change', function(){
       const item = this.closest('.consent-item');
       item.classList.toggle('checked', this.checked);
+      this.closest('.consent-check-row').classList.toggle('selected', this.checked);
       updateConsentSubmitState();
       if(this.checked) scrollToNextConsentItem(item);
     });
