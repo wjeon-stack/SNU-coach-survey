@@ -494,6 +494,18 @@
   }
   .submit-fail.show{display:block;}
 
+  /* Page footer */
+  .page-footer{
+    margin-top:36px; padding-top:24px; border-top:1px solid var(--line);
+    text-align:center;
+  }
+  .footer-logo{height:24px; width:auto; margin-bottom:14px;}
+  .footer-contact{font-size:12.5px; color:var(--slate); line-height:1.8;}
+  .footer-contact p{margin:0;}
+  .footer-contact-title{font-weight:700; color:var(--navy);}
+  .footer-contact a{color:var(--slate); text-decoration:none;}
+  .footer-contact a:hover{text-decoration:underline;}
+
   /* Success screen */
   .success-screen{
     max-width:560px; margin:80px auto; text-align:center; padding:0 20px;
@@ -1161,6 +1173,15 @@ function renderSurvey(){
         <div class="submit-note">참가 동의 작성까지 완료해야 제출됩니다.</div>
       </div>
     </form>
+
+    <div class="page-footer">
+      <img src="logo.png" alt="클립스컨설팅" class="footer-logo">
+      <div class="footer-contact">
+        <p class="footer-contact-title">문의)</p>
+        <p>대표메일 : <a href="mailto:contact@clipsgroup.co.kr">contact@clipsgroup.co.kr</a></p>
+        <p>대표번호: <a href="tel:02-761-3164">02-761-3164</a></p>
+      </div>
+    </div>
     </div>
   </div>
   </div>
