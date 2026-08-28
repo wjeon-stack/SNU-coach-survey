@@ -410,6 +410,16 @@
   }
   .choice-btn:hover{border-color:#BFD3F7;}
   .choice-btn.active{background:var(--blue); border-color:var(--blue); color:var(--white);}
+  .coach-reason-box{
+    margin-top:12px; padding-top:12px; border-top:1px solid var(--line);
+  }
+  .coach-reason-label{font-size:11.5px; font-weight:700; color:var(--blue); margin-bottom:6px;}
+  .coach-reason-input{
+    width:100%; font-family:inherit; font-size:12.5px;
+    color:var(--ink); background:var(--paper); border:1.5px solid var(--line);
+    border-radius:8px; padding:8px 10px; resize:vertical; min-height:56px;
+  }
+  .coach-reason-input:focus{outline:none; border-color:var(--blue); background:var(--white);}
 
   /* Submit */
   .submit-wrap{margin-top:30px; padding-top:20px;}
@@ -585,6 +595,12 @@ function getCurrentChoices(){
   ];
 }
 
+function escapeHtml(str){
+  return String(str||'').replace(/[&<>"']/g, ch => ({
+    '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;'
+  }[ch]));
+}
+
 function setChoiceFromModal(coachVal, slot){
   const sels = [document.getElementById('q_choice1'), document.getElementById('q_choice2'), document.getElementById('q_choice3')];
   const target = sels[slot-1];
@@ -646,9 +662,30 @@ function renderCoachList(filter){
         <button type="button" class="choice-btn${pickedSlot===1?' active':''}" data-coach="${val}" data-slot="2">2순위</button>
         <button type="button" class="choice-btn${pickedSlot===2?' active':''}" data-coach="${val}" data-slot="3">3순위</button>
       </div>
+      ${pickedSlot>=0 ? (()=>{
+        const reasonField = document.getElementById('q_reason' + (pickedSlot+1));
+        const currentReason = reasonField ? reasonField.value : '';
+        return `
+        <div class="coach-reason-box">
+          <div class="coach-reason-label">${pickedSlot+1}순위 선택 이유</div>
+          <textarea class="coach-reason-input" data-slot="${pickedSlot+1}" placeholder="이 코치를 선택한 이유를 작성해 주세요">${escapeHtml(currentReason)}</textarea>
+        </div>
+      `;
+      })() : ''}
     </div>
   `;
   }).join('') + '</div>';
+
+  list.querySelectorAll('.coach-reason-input').forEach(ta=>{
+    ta.addEventListener('input', function(){
+      const slot = this.dataset.slot;
+      const mainField = document.getElementById('q_reason' + slot);
+      if(!mainField) return;
+      mainField.value = this.value;
+      document.getElementById('err_reason' + slot)?.classList.remove('show');
+      mainField.closest('.card')?.classList.remove('invalid');
+    });
+  });
 }
 
 function openModal(){
@@ -714,7 +751,7 @@ function renderSurvey(){
   <div class="sheet">
     <div class="sheet-inner">
     <div class="hero">
-      <span class="eyebrow">삼성그룹 현직자</span>
+      <span class="eyebrow">2026-2 대학원생 경력 및 업무 역량 강화 프로그램</span>
       <h1>서울대학교 대학원생<br>현직자 1:1 커리어코칭 프로그램<br><span class="accent">희망코치진 설문조사</span></h1>
       <div class="hero-dots"><span></span><span></span><span></span></div>
     </div>
