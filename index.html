@@ -497,8 +497,9 @@
   /* Page footer */
   .page-footer{
     margin-top:36px; padding-top:24px; border-top:1px solid var(--line);
-    text-align:left;
+    display:flex; justify-content:center;
   }
+  .footer-inner{display:flex; flex-direction:column; align-items:flex-start;}
   .footer-logo{height:40px; width:auto; margin-bottom:14px;}
   .footer-contact{font-size:12.5px; color:var(--slate); line-height:1.8;}
   .footer-contact p{margin:0;}
@@ -1175,11 +1176,13 @@ function renderSurvey(){
     </form>
 
     <div class="page-footer">
-      <img src="logo.png" alt="클립스컨설팅" class="footer-logo">
-      <div class="footer-contact">
-        <p class="footer-contact-title">문의)</p>
-        <p>대표메일 : <a href="mailto:contact@clipsgroup.co.kr">contact@clipsgroup.co.kr</a></p>
-        <p>대표번호: <a href="tel:02-761-3164">02-761-3164</a></p>
+      <div class="footer-inner">
+        <img src="logo.png" alt="클립스컨설팅" class="footer-logo">
+        <div class="footer-contact">
+          <p class="footer-contact-title">문의)</p>
+          <p>대표메일 : <a href="mailto:contact@clipsgroup.co.kr">contact@clipsgroup.co.kr</a></p>
+          <p>대표번호: <a href="tel:02-761-3164">02-761-3164</a></p>
+        </div>
       </div>
     </div>
     </div>
