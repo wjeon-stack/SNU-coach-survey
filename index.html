@@ -1163,6 +1163,17 @@ function renderSurvey(){
         <div class="error-msg" id="err_topic">주제를 선택해 주세요.</div>
       </div>
 
+      <div class="card">
+        <div class="q-label">8. 선택한 주제 관련하여 코칭을 통해 꼭 얻고 싶은 것이 무엇인가요? <span class="req">*</span></div>
+        <textarea id="q_goal"></textarea>
+        <div class="error-msg" id="err_goal">내용을 작성해 주세요.</div>
+      </div>
+
+      <div class="card">
+        <div class="q-label">9. 추가로 남기고 싶으신 의견이나 궁금한 점이 있다면 자유롭게 기재해 주세요.</div>
+        <textarea id="q_etc"></textarea>
+      </div>
+
       <div class="submit-wrap">
         <div class="submit-fail" id="submitFail"></div>
         <button type="submit" class="submit-btn" id="submitBtn">참가 동의 작성</button>
@@ -1222,7 +1233,7 @@ function renderSurvey(){
 
   // text inputs / textareas: advance to the next question once the viewer
   // finishes typing (blur) or presses Enter, rather than while they're still typing
-  ['q_name','q_studentId','q_dept','q_reason1','q_reason2','q_reason3'].forEach(id=>{
+  ['q_name','q_studentId','q_dept','q_reason1','q_reason2','q_reason3','q_goal','q_etc'].forEach(id=>{
     const field = document.getElementById(id);
     field.addEventListener('blur', function(){
       if(this.value.trim()) scrollToNext(this);
@@ -1274,6 +1285,8 @@ async function handleSubmit(e){
   const reason2 = document.getElementById('q_reason2').value.trim();
   const choice3 = document.getElementById('q_choice3').value;
   const reason3 = document.getElementById('q_reason3').value.trim();
+  const goal = document.getElementById('q_goal').value.trim();
+  const etc = document.getElementById('q_etc').value.trim();
 
   if(!name){ showError('err_name', document.getElementById('q_name').closest('.card')); valid=false; }
   if(!studentId){ showError('err_studentId', document.getElementById('q_studentId').closest('.card')); valid=false; }
@@ -1290,6 +1303,7 @@ async function handleSubmit(e){
   if(!reason2){ showError('err_reason2', document.getElementById('q_reason2').closest('.card')); valid=false; }
   if(!choice3){ showError('err_choice3', document.getElementById('q_choice3').closest('.card')); valid=false; }
   if(!reason3){ showError('err_reason3', document.getElementById('q_reason3').closest('.card')); valid=false; }
+  if(!goal){ showError('err_goal', document.getElementById('q_goal').closest('.card')); valid=false; }
 
   if(!valid){
     document.querySelector('.card.invalid, .error-msg.show')?.scrollIntoView({behavior:'smooth', block:'center'});
@@ -1301,7 +1315,8 @@ async function handleSubmit(e){
     topic: topicChecked.value === '기타' ? `기타: ${topicOther}` : topicChecked.value,
     choice1: realCoachLabel(choice1), reason1,
     choice2: realCoachLabel(choice2), reason2,
-    choice3: realCoachLabel(choice3), reason3
+    choice3: realCoachLabel(choice3), reason3,
+    goal, etc
   };
 
   openGuideModal();
@@ -1661,6 +1676,7 @@ async function renderAdmin(){
         <th>1순위</th><th>1순위 이유</th>
         <th>2순위</th><th>2순위 이유</th>
         <th>3순위</th><th>3순위 이유</th>
+        <th>코칭 목표</th><th>기타 의견</th>
         <th>안내문 확인</th><th>참가 동의</th>
       </tr></thead>
       <tbody>
@@ -1677,6 +1693,8 @@ async function renderAdmin(){
             <td>${r.reason2}</td>
             <td>${r.choice3}</td>
             <td>${r.reason3}</td>
+            <td>${r.goal || ''}</td>
+            <td>${r.etc || ''}</td>
             <td>${r.guide_confirmed || ''}</td>
             <td>${r.consent_agreed || ''}</td>
           </tr>
@@ -1687,10 +1705,11 @@ async function renderAdmin(){
   `;
 
   document.getElementById('exportBtn').addEventListener('click', ()=>{
-    const headers = ['제출시각','성명','학번','소속','주제','1순위','1순위이유','2순위','2순위이유','3순위','3순위이유','안내문확인','참가동의'];
+    const headers = ['제출시각','성명','학번','소속','주제','1순위','1순위이유','2순위','2순위이유','3순위','3순위이유','코칭목표','기타의견','안내문확인','참가동의'];
     const rows = records.map(r=>[
       new Date(r.submitted_at).toLocaleString('ko-KR'), r.name, r.student_id, r.dept, r.topic,
       r.choice1, r.reason1, r.choice2, r.reason2, r.choice3, r.reason3,
+      r.goal || '', r.etc || '',
       r.guide_confirmed || '', r.consent_agreed || ''
     ]);
     const csvContent = [headers, ...rows].map(row =>
