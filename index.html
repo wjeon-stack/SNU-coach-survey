@@ -1164,7 +1164,7 @@ function renderSurvey(){
       </div>
 
       <div class="card">
-        <div class="q-label">8. 선택한 주제 관련하여 코칭을 통해 꼭 얻고 싶은 것이 무엇인가요? <span class="req">*</span></div>
+        <div class="q-label">8. 선택한 주제 관련하여 코칭을 통해 꼭 얻고 싶은 것은 무엇인가요? <span class="req">*</span></div>
         <textarea id="q_goal"></textarea>
         <div class="error-msg" id="err_goal">내용을 작성해 주세요.</div>
       </div>
@@ -1672,11 +1672,11 @@ async function renderAdmin(){
   <div style="overflow-x:auto;">
     <table class="admin-table">
       <thead><tr>
-        <th>제출시각</th><th>성명</th><th>학번</th><th>소속</th><th>주제</th>
+        <th>제출시각</th><th>성명</th><th>학번</th><th>소속</th>
         <th>1순위</th><th>1순위 이유</th>
         <th>2순위</th><th>2순위 이유</th>
         <th>3순위</th><th>3순위 이유</th>
-        <th>코칭 목표</th><th>기타 의견</th>
+        <th>주제</th><th>코칭 목표</th><th>기타 의견</th>
         <th>안내문 확인</th><th>참가 동의</th>
       </tr></thead>
       <tbody>
@@ -1686,13 +1686,13 @@ async function renderAdmin(){
             <td>${r.name}</td>
             <td>${r.student_id}</td>
             <td>${r.dept}</td>
-            <td>${r.topic}</td>
             <td>${r.choice1}</td>
             <td>${r.reason1}</td>
             <td>${r.choice2}</td>
             <td>${r.reason2}</td>
             <td>${r.choice3}</td>
             <td>${r.reason3}</td>
+            <td>${r.topic}</td>
             <td>${r.goal || ''}</td>
             <td>${r.etc || ''}</td>
             <td>${r.guide_confirmed || ''}</td>
@@ -1705,10 +1705,10 @@ async function renderAdmin(){
   `;
 
   document.getElementById('exportBtn').addEventListener('click', ()=>{
-    const headers = ['제출시각','성명','학번','소속','주제','1순위','1순위이유','2순위','2순위이유','3순위','3순위이유','코칭목표','기타의견','안내문확인','참가동의'];
+    const headers = ['제출시각','성명','학번','소속','1순위','1순위이유','2순위','2순위이유','3순위','3순위이유','주제','코칭목표','기타의견','안내문확인','참가동의'];
     const rows = records.map(r=>[
-      new Date(r.submitted_at).toLocaleString('ko-KR'), r.name, r.student_id, r.dept, r.topic,
-      r.choice1, r.reason1, r.choice2, r.reason2, r.choice3, r.reason3,
+      new Date(r.submitted_at).toLocaleString('ko-KR'), r.name, r.student_id, r.dept,
+      r.choice1, r.reason1, r.choice2, r.reason2, r.choice3, r.reason3, r.topic,
       r.goal || '', r.etc || '',
       r.guide_confirmed || '', r.consent_agreed || ''
     ]);
